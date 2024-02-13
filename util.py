@@ -63,15 +63,15 @@ def scrape_listings(listings, community):
         link = get_link(listing, listing_id)
 
         listing_item = {
-            'address': address,
-            'community': community,
-            'price': price,
-            'type': r_type,
-            'beds': beds,
-            'baths': baths,
-            'area': area,
-            'dom': dom,
-            'link': link
+            'Address': address,
+            'Community': community,
+            'Price': price,
+            'Type': r_type,
+            'Beds': beds,
+            'Baths': baths,
+            'Sqft': area,
+            'DOM': dom,
+            'Link': link
         }
 
         property_list.append(listing_item)
