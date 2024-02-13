@@ -78,7 +78,7 @@ def scrape_listing(listing, community):
 def scrape_listings(listings, community):
     property_list = []
     
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         partial_scrape_listing = functools.partial(scrape_listing, community=community)
         property_list.extend(executor.map(partial_scrape_listing, listings))
 
