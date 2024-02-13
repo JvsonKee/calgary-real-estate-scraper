@@ -1,6 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+def get_cookies(driver):
+    return driver.find_element(By.CLASS_NAME, 'close-icon')
+
+def get_communities(driver):
+    community_list = driver.find_element(By.XPATH, '//*[@id="feature-deck"]/div/div')
+    communities = community_list.find_elements(By.TAG_NAME, 'article')
+    return communities
+
 def get_price(listing, listing_id):
     price = listing.find_element(By.XPATH, f'//*[@id="{listing_id}"]/div[2]/hgroup/h3/span').text
     return price.replace('$', '').replace(',', '')
