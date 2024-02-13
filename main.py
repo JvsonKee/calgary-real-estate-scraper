@@ -38,7 +38,11 @@ def get_dom(listing, listing_id):
         return ""
     return dom.text
 
-def scrape_listings(listings):
+def get_link(listing, listing_id):
+    link = listing.find_element(By.XPATH, f'//*[@id="{listing_id}"]/div[1]/a')
+    return link.get_attribute('href')
+
+def scrape_listings(listings, community):
     for listing in listings:
         listing_id = listing.get_attribute("id")
 
@@ -49,15 +53,18 @@ def scrape_listings(listings):
         baths = get_baths(listing, listing_id)
         area = get_area(listing, listing_id)
         dom = get_dom(listing, listing_id)
+        link = get_link(listing, listing_id)
 
         listing_item = {
             'address': address,
+            'community': community,
             'price': price,
             'type': r_type,
             'beds': beds,
             'baths': baths,
             'area': area,
-            'dom': dom 
+            'dom': dom,
+            'link': link
         }
 
         property_list.append(listing_item)
@@ -74,14 +81,15 @@ cookies = driver.find_element(By.CLASS_NAME, 'close-icon')
 if (cookies):
     cookies.click()
 
-community = driver.find_element(By.XPATH, '//*[@id="feature-deck"]/div/div/article[1]/a')
+community = driver.find_element(By.XPATH, '//*[@id="feature-deck"]/div/div/article[8]/a')
+community_name = community.text
 community.click()
 
 while (True):
     listings_list = driver.find_element(By.CLASS_NAME, 'articleset')
     listings = driver.find_elements(By.TAG_NAME, 'article')
 
-    scrape_listings(listings)
+    scrape_listings(listings, community_name)
 
     try:
         next = driver.find_element(By.CLASS_NAME, 'next')
