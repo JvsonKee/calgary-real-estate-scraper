@@ -7,7 +7,7 @@ This Python-based webscraping tool is designed to scrape real estate listings ac
 ## Installation
 
 1. Clone or download the repository to your local machine.
-2. Install the required dependancies using pip.
+2. Install the required dependencies using pip.
 
 ```bash
     pip install -r requirements.txt
