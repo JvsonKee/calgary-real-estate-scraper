@@ -103,6 +103,3 @@ def scrape_community(driver, community_id, property_list):
         except NoSuchElementException:
             break;
         next.click()
-
-
-    
